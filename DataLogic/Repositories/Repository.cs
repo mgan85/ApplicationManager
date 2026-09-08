@@ -13,13 +13,13 @@ namespace DataLogic.Repositories
             _dbSet = _context.Set<T>();
         }
 
-        public virtual async Task<T?> GetByIdAsync(int id) => await _dbSet.FindAsync(id);
+        public async Task<T?> GetByIdAsync(int id) => await _dbSet.FindAsync(id);
   
-        public virtual async Task<List<T>> GetAllAsync() => await _dbSet.ToListAsync();
+        public async Task<List<T>> GetAllAsync() => await _dbSet.ToListAsync();
 
-        public virtual async Task AddAsync(T entity) => await _dbSet.AddAsync(entity);
+        public async Task AddAsync(T entity) => await _dbSet.AddAsync(entity);
 
-        public virtual void Remove(T entity) => _dbSet.Remove(entity);   
+        public void Remove(T entity) => _dbSet.Remove(entity);   
 
         public async Task SaveChangesAsync() => await _context.SaveChangesAsync();
     }
