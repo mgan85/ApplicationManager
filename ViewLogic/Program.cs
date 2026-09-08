@@ -1,7 +1,12 @@
+using DataLogic;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+//  Register repositories form data layer
+builder.Services.AddDataServices(builder.Configuration);
 
 var app = builder.Build();
 
