@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="BusinessLogic/BusinessLogic.csproj" Id="5b3be113-d48d-4dec-960f-957e4e60b9c5" />
+  <Project Path="DataLogic/DataLogic.csproj" Id="4e8a0da0-b93c-4a5e-97da-ac5ed415279e" />
+  <Project Path="ViewLogic/ViewLogic.csproj" Id="95f394e9-c278-4704-8458-4bdfe6f8c9a1" />
+</Solution>
