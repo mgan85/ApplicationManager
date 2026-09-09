@@ -1,4 +1,5 @@
 using DataLogic;
+using BusinessLogic;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,9 @@ builder.Services.AddRazorPages();
 
 //  Register repositories form data layer
 builder.Services.AddDataServices(builder.Configuration);
+
+//register business services
+builder.Services.AddBusinessServices(builder.Configuration);
 
 var app = builder.Build();
 
