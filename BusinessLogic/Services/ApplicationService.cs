@@ -60,19 +60,40 @@ public class ApplicationService(IApplicationRepository repository) : IApplicatio
         await _repository.SaveChangesAsync();
     }
 
-    public async Task<List<Application>> GetApplicationsByUserIdAsync(int userId)
+    public async Task<List<ApplicationDto>> GetApplicationsByUserIdAsync(int userId)
     {
         var userExists = await _repository.UserExistsAsync(userId);
         if (!userExists)
             throw new NotFoundException($"User with Id {userId} not found.");
 
-        return await _repository.GetApplicationsByUserIdAsync(userId);
+        var applications = await _repository.GetApplicationsByUserIdAsync(userId);
+
+        return [.. applications.Select(app => new ApplicationDto
+        {
+            Id = app.Id,
+            UserId = app.UserId,
+            JobOfferId = app.JobOfferId,
+            HandlerId = app.HandlerId,
+            StatusId = app.StatusId,
+            ApplyDate = app.ApplyDate
+        })];
     }
 
-    public async Task<Application?> GetFullApplicationDetailsAsync(int applicationId)
+    public async Task<ApplicationDto?> GetFullApplicationDetailsAsync(int applicationId)
     {
-        var application = await _repository.GetFullApplicationDetailsAsync(applicationId);
-        
-        return application ?? throw new NotFoundException($"Application with Id {applicationId} not found.");
+        var application = await _repository.GetApplicationByIdAsync(applicationId);
+
+        return application == null
+            ? throw new NotFoundException($"Application with Id {applicationId} not found.")
+            : new ApplicationDto
+         {
+             Id = application.Id,
+             UserId = application.UserId,
+             JobOfferId = application.JobOfferId,
+             HandlerId = application.HandlerId,
+             StatusId = application.StatusId,
+             StatusName = application.Status.Name,
+             ApplyDate = application.ApplyDate
+         };
     }
 }

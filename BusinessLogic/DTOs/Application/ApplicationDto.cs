@@ -5,6 +5,7 @@ public class ApplicationDto
     public int Id { get; set; }
     public bool IsApplied { get; set; }
     public DateTime? ApplyDate { get; set; }
+    public int StatusId { get; set; }
     public string StatusName { get; set; } = string.Empty;
 
     public int? JobOfferId { get; set; }

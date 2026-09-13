@@ -8,7 +8,7 @@ public interface IApplicationRepository : IRepository<Application>
     Task<bool> OfferExistsAsync(int offerId);
 
     Task<List<Application>> GetApplicationsByUserIdAsync(int userId);
-    Task<Application?> GetFullApplicationDetailsAsync(int id);
+    Task<Application?> GetApplicationByIdAsync(int id);
 }
 
 public class ApplicationRepository(ApplicationDbContext context) : Repository<Application>(context), IApplicationRepository
@@ -25,10 +25,12 @@ public class ApplicationRepository(ApplicationDbContext context) : Repository<Ap
             .Where(a => a.UserId == userId)
             .Include(a => a.Status)
             .Include(a => a.JobOffer)
+            .Include(a => a.Handler)
+                .ThenInclude(h => h!.Phone)
             .ToListAsync();
     }
 
-    public async Task<Application?> GetFullApplicationDetailsAsync(int id)
+    public async Task<Application?> GetApplicationByIdAsync(int id)
     {
         return await _dbSet
             .Include(a => a.Status)
