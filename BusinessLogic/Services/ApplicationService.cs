@@ -79,7 +79,7 @@ public class ApplicationService(IApplicationRepository repository) : IApplicatio
         })];
     }
 
-    public async Task<ApplicationDto?> GetFullApplicationDetailsAsync(int applicationId)
+    public async Task<ApplicationDto?> GetApplicationAsync(int applicationId)
     {
         var application = await _repository.GetApplicationByIdAsync(applicationId);
 
