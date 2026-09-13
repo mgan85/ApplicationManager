@@ -18,8 +18,8 @@ namespace DataLogic.Repositories
 
         public Repository(ApplicationDbContext context)
         {
-            _context = context;
-            _dbSet = _context.Set<T>();
+            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _dbSet = _context.Set<T>() ?? throw new InvalidOperationException($"DbSet for type {typeof(T).Name} not found in the context.");
         }
 
         public async Task<T?> GetByIdAsync(int id) => await _dbSet.FindAsync(id);
