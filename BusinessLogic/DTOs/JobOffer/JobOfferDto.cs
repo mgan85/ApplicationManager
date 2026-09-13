@@ -1,4 +1,5 @@
-﻿using BusinessLogic.DTOs.Skill;
+﻿using BusinessLogic.DTOs.JobType;
+using BusinessLogic.DTOs.Skill;
 
 namespace BusinessLogic.DTOs.JobOffer;
 
@@ -10,7 +11,7 @@ public class JobOfferDto
     public string CompanyName { get; set; } = string.Empty;
     public decimal? Salary { get; set; }
     public string? Platform { get; set; }
-    public string? JobTypeName { get; set; }
+    public JobTypeDto? JobType { get; set; }
 
     public List<SkillDto> RequiredSkills { get; set; } = new();
 }
